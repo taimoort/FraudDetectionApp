@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug TransactionService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build TransactionService",
+            "program": "${workspaceFolder}/TransactionService/bin/Debug/net9.0/TransactionService.dll",
+            "cwd": "${workspaceFolder}/TransactionService",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        },
+        {
+            "name": "Debug FraudDetectorService",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build FraudDetectorService",
+            "program": "${workspaceFolder}/FraudDetectorService/bin/Debug/net9.0/FraudDetectorService.dll",
+            "cwd": "${workspaceFolder}/FraudDetectorService",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}

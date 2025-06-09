@@ -1,0 +1,8 @@
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.csproj.AssemblyReference.cache
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.GeneratedMSBuildEditorConfig.editorconfig
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.AssemblyInfoInputs.cache
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.AssemblyInfo.cs
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.csproj.CoreCompileInputs.cache
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.MvcApplicationPartsAssemblyInfo.cs
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.MvcApplicationPartsAssemblyInfo.cache
+/Users/taimoormasood/FraudDetectionApp/TransactionService/obj/Debug/net8.0/TransactionService.sourcelink.json

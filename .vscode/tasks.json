@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build TransactionService",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/TransactionService/TransactionService.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build FraudDetectorService",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/FraudDetectorService/FraudDetectorService.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}
