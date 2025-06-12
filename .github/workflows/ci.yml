@@ -1,0 +1,48 @@
+name: build-test # Shown in the Actions UI
+
+on: [push, pull_request] # Run for every branch + PR
+
+jobs:
+  backend-frontend:
+    runs-on: ubuntu-latest
+
+    # --- 1.  Get the code ----------------------------------------------------
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # --- 2.  .NET 9 build & (optional) tests --------------------------------
+      - name: Set up .NET 9 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x # pick latest preview/GA 9 SDK
+
+      # restore caches (nuget) automatically handled by setup-dotnet v4
+
+      - name: Build backend
+        run: dotnet build --configuration Release
+
+      # For unit tests later:
+      # - name: Test backend
+      #   run: dotnet test --configuration Release --no-build
+
+      # --- 3.  Node 18 build ---------------------------------------------------
+      - name: Set up Node 18
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - name: Build frontend
+        working-directory: fraud-frontend
+        run: |
+          npm ci
+          npm run build
+
+    # --- 4.  Docker images ---------------------------------------
+    # CI to build images
+    #
+    # - name: Build Docker images
+    #   run: |
+    #     docker build -t frauddetectorservice:ci ./FraudDetectorService
+    #     docker build -t fraudfrontend:ci      ./fraud-frontend

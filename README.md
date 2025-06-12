@@ -1,6 +1,6 @@
 # Fraud Detection App
 
-This repo contains the initial setup for a .NET 8 + Kafka + PostgreSQL + React fraud detection system.
+This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React fraud detection system.
 
 ## Prerequisites
 
