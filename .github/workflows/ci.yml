@@ -32,6 +32,7 @@ jobs:
         with:
           node-version: 18
           cache: "npm"
+          cache-dependency-path: fraud-frontend/package-lock.json
 
       - name: Build frontend
         working-directory: fraud-frontend
