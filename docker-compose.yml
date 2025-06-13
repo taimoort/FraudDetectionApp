@@ -17,8 +17,9 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
       # Listen on all interfaces:
       - KAFKA_CFG_LISTENERS=PLAINTEXT://0.0.0.0:9092
-      # Advertise to clients as localhost:9092
-      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      # Advertise to clients as kafka:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT 
       # Make sure inter-broker traffic also uses PLAINTEXT
       - KAFKA_CFG_INTER_BROKER_LISTENER_NAME=PLAINTEXT
     depends_on:
@@ -56,6 +57,41 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
+  
+  transactionservice:
+    build:
+      context: .                      # repo root
+      dockerfile: TransactionService/Dockerfile          # path to the Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:8080
+      - Kafka__BootstrapServers=kafka:9092
+      - Elasticsearch__Uri=http://elasticsearch:9200
+    depends_on:
+      - kafka
+    ports:
+      - "5003:8080"                        # host 5003 → container 80
+
+  frauddetectorservice:
+    build: 
+      context: .                      # repo root 
+      dockerfile: FraudDetectorService/Dockerfile        
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:5000
+      - ConnectionStrings__FraudDatabase=Host=postgres;Port=5432;Database=fraud_db;Username=postgres;Password=postgres
+      - Kafka__BootstrapServers=kafka:9092
+      - Elasticsearch__Uri=http://elasticsearch:9200
+    depends_on:
+      - kafka
+      - postgres
+    ports:
+      - "5001:5000" 
+
+  frontend:
+    build: ./fraud-frontend
+    depends_on:
+      - frauddetectorservice    
+    ports:
+      - "8080:80"               
 
 volumes:
   zookeeper_data:

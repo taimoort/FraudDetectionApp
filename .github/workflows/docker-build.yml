@@ -1,0 +1,41 @@
+name: build-and-push
+
+on: [push]
+
+jobs:
+  services:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        include:
+          - name: transactionservice
+            ctx: .
+            dockerfile: TransactionService/Dockerfile
+          - name: frauddetectorservice
+            ctx: .
+            dockerfile: FraudDetectorService/Dockerfile
+          - name: fraud-frontend
+            ctx: .
+            dockerfile: fraud-frontend/Dockerfile
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # matrix builds all three images
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ matrix.ctx }}
+          file: ${{ matrix.dockerfile }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ matrix.name }}:latest
+          push: true

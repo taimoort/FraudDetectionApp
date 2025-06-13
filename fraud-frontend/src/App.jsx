@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
-function App() {
-  const [count, setCount] = useState(0)
+import { useEffect, useState } from 'react';
+export default function App() {
+  const [alerts, setAlerts] = useState([]);
+  useEffect(() => {
+    fetch('/api/alerts')
+      .then(r => r.json())
+      .then(setAlerts);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container">
+      <h1>Fraud Alerts (last 50)</h1>
+      <table>
+        <thead><tr><th>ID</th><th>Amount</th><th>Timestamp</th></tr></thead>
+        <tbody>
+          {alerts.map(a => (
+            <tr key={a.id}>
+              <td>{a.transactionId}</td>
+              <td>{a.amount.toLocaleString()}</td>
+              <td>{new Date(a.timestamp).toLocaleString()}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 }
-
-export default App

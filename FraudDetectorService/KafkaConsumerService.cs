@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 
 public class KafkaConsumerService : BackgroundService
 {
-    private readonly ConsumerConfig _config = new()
-    {
-        BootstrapServers = "localhost:9092",
-        GroupId = "fraud-detector",
-        AutoOffsetReset = AutoOffsetReset.Earliest
-    };
+    private readonly ConsumerConfig _config;
     private readonly IServiceProvider _services;
     private readonly ILogger<KafkaConsumerService> _logger;
 
-    public KafkaConsumerService(IServiceProvider services, ILogger<KafkaConsumerService> logger)
+    public KafkaConsumerService(IConfiguration cfg, IServiceProvider services, ILogger<KafkaConsumerService> logger)
     {
         _services = services;
         _logger = logger;
+        _config = new ConsumerConfig
+        {
+            BootstrapServers = cfg["Kafka:BootstrapServers"],  // picks env/appsettings
+            GroupId = "fraud-detector",
+            AutoOffsetReset = AutoOffsetReset.Earliest
+        };
     }
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken) =>
@@ -30,9 +31,12 @@ public class KafkaConsumerService : BackgroundService
             using var consumer = new ConsumerBuilder<Null, string>(_config).Build();
             consumer.Subscribe("transactions");
             _logger.LogInformation("Kafka consumer subscribed to ‘transactions’ topic");
-
+            /* using var adminClient = new AdminClientBuilder(
+                            new AdminClientConfig { BootstrapServers = _config.BootstrapServers }
+                        ).Build(); */
             while (!stoppingToken.IsCancellationRequested)
             {
+                /* var meta = adminClient.GetMetadata("transactions", TimeSpan.FromSeconds(10)); */
                 var result = consumer.Consume(stoppingToken);
                 var tx = JsonSerializer.Deserialize<TransactionDto>(result.Message.Value);
 

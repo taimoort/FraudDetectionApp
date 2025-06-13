@@ -58,10 +58,6 @@
               "target": "Package",
               "version": "[9.0.5, )"
             },
-            "Microsoft.Extensions.Hosting": {
-              "target": "Package",
-              "version": "[9.0.5, )"
-            },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.4, )"
@@ -91,6 +87,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
