@@ -18,8 +18,8 @@ jobs:
             ctx: .
             dockerfile: FraudDetectorService/Dockerfile
           - name: fraud-frontend
-            ctx: .
-            dockerfile: fraud-frontend/Dockerfile
+            ctx: fraud-frontend # <─ build context is the sub-folder
+            dockerfile: Dockerfile
     steps:
       - uses: actions/checkout@v4
 
