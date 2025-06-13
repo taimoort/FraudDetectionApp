@@ -39,12 +39,3 @@ jobs:
         run: |
           npm ci
           npm run build
-
-      # --- 4.  Docker images ---------------------------------------
-      # CI to build images
-      #
-      - name: Build Docker images
-        run: |
-          docker build -t transactionservice:ci ./TransactionService
-          docker build -t frauddetectorservice:ci ./FraudDetectorService
-          docker build -t fraudfrontend:ci      ./fraud-frontend
