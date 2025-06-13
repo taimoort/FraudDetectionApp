@@ -25,8 +25,7 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
    git clone https://github.com/<your-user>/fraud-detection-app.git
    cd fraud-detection-app
    docker-compose up -d --build   # spins up Kafka, ZK, Postgres, ES, Kibana *and* both .NET services + React UI
-
-
+   ``` 
 ## Architecture
 
                                    ┌──────────────────────┐
@@ -54,7 +53,7 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
                                    │  ─ rules / enrichment    │
                                    └──────────┬───────────────┘
                                               │  INSERT (fraud)           Serilog logs
-                                              │  into SQL                 ─────────────►
+                                              │  into SQL                 ─────────────
                                               │                           │
                                               │ produce                   ▼
                                               │ topic: transactions_enriched
