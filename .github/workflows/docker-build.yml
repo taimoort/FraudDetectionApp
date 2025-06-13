@@ -18,11 +18,7 @@ jobs:
             ctx: .
             dockerfile: FraudDetectorService/Dockerfile
           - name: fraud-frontend
-<<<<<<< HEAD
             ctx: fraud-frontend # <─ build context is the sub-folder
-=======
-            ctx: .
->>>>>>> 577efa3 (feat: containerise all services and add CI pipeline)
             dockerfile: fraud-frontend/Dockerfile
     steps:
       - uses: actions/checkout@v4
