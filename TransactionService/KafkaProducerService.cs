@@ -17,7 +17,7 @@ public class KafkaProducerService
     public async Task SendMessageAsync(string topic, string message)
     {
         await _producer.ProduceAsync(topic, new Message<Null, string> { Value = message });
-        using var admin = new AdminClientBuilder(
+        /* using var admin = new AdminClientBuilder(
         new AdminClientConfig { BootstrapServers = "localhost:9092" }
     ).Build();
         try
@@ -28,6 +28,6 @@ public class KafkaProducerService
         catch (KafkaException ex)
         {
             _logger.LogError(ex, "Failed to fetch Kafka metadata");
-        }
+        } */
     }
 }
