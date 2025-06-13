@@ -4,9 +4,7 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
 
 ## Prerequisites
 
-- Docker Desktop (Apple Silicon)  
-- .NET 9 SDK  
-- Node.js (LTS)
+- Docker Desktop (Windows / macOS) or Docker Engine + docker-compose on Linux 
 
 ## Features
 
@@ -22,10 +20,18 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
 1  Run everything in containers
 
    ```bash
-   git clone https://github.com/<your-user>/fraud-detection-app.git
-   cd fraud-detection-app
+   git clone https://github.com/taimoort/FraudDetectionApp.git
+   cd FraudDetectionApp
    docker-compose up -d --build   # spins up Kafka, ZK, Postgres, ES, Kibana *and* both .NET services + React UI
    ``` 
+## Default endpoints
+
+| Component / Service           | URL / Connection                                   | Notes                                   |
+|-------------------------------|----------------------------------------------------|-----------------------------------------|
+| **React Dashboard**           | <http://localhost:8080>                            | Lists latest fraud alerts               |
+| **TransactionService API**    | <http://localhost:5003/>                           | Postman UI for `/api/transaction`       |
+| **Kibana**                    | <http://localhost:5601>                            | Create index pattern `fraud-*`          |
+
 ## Architecture
 
                                    ┌──────────────────────┐
