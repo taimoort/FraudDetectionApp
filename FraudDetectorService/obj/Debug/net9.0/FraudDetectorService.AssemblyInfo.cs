@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FraudDetectorService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0afd29652c0a074aa189f0e03cb4f8ae95d94d36")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9605856ffe5543a0de249ebce98388d4e196ca0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FraudDetectorService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FraudDetectorService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

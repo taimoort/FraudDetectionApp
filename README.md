@@ -15,9 +15,13 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
 - ✔ EF Core PostgreSQL persistence
 - ✔ Serilog logs → Elasticsearch
 - ✔ Kibana log visualization and discovery
+- ✔ GitHub Actions** CI: build backend & frontend, push Docker images to **Docker Hub**
 
 ## Running Locally
 
-1. Start infrastructure:  
+1  Run everything in containers
+
    ```bash
-   docker-compose up -d
+   git clone https://github.com/<your-user>/fraud-detection-app.git
+   cd fraud-detection-app
+   docker-compose up -d --build   # spins up Kafka, ZK, Postgres, ES, Kibana *and* both .NET services + React UI

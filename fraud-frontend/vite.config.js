@@ -6,7 +6,7 @@ export default defineConfig({
   server: {
     proxy: {
       // Any request that starts with /api goes to the .NET service
-      '/api': 'http://localhost:5000'   // ← use whatever port FraudDetectorService is on
+      '/api': 'http://localhost:5001'   // ← use whatever port FraudDetectorService is on
     }
   }
 });
