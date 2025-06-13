@@ -29,42 +29,45 @@ This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React 
 
 ## Architecture
 
-```mermaid
-%% Fraud-Detection Architecture
-graph TD
-  %% Clients
-  user[User / Recruiter]
-  subgraph Front-end
-    ui[React Dashboard]
-  end
-  subgraph Back-end
-    api[TransactionService (API)]
-    worker[FraudDetectorService]
-    pg[(PostgreSQL)]
-  end
-  subgraph Kafka
-    zk[Zookeeper]
-    broker[Kafka Broker]
-    raw[(transactions_raw)]
-    enriched[(transactions_enriched)]
-    connect[Kafka Connect]
-    registry[Schema Registry]
-  end
-  subgraph Observability
-    es[(Elasticsearch)]
-    kib[Kibana]
-  end
+                                   ┌──────────────────────┐
+                                   │   React Front-end    │
+                                   └──────────▲───────────┘
+                                              │  HTTP POST /transaction
+                                              │
+                                   ┌──────────┴───────────┐
+                                   │ TransactionService   │
+                                   │       API            │
+                                   └──────────┬───────────┘
+                                              │   produce
+                                              │   topic: transactions_raw
+                                   ┌──────────▼───────────┐
+                                   │     Apache Kafka     │
+                                   └──────────┬───────────┘
+                                              │
+             Zookeeper config                 │
+              ┌──────────┐                    │ consume
+              │ Zookeeper│                    │
+              └────▲─────┘                    ▼
+                   │               ┌──────────────────────────┐
+                   └──────────────►│ FraudDetector-Service    │
+                                   │  Worker (.NET)           │
+                                   │  ─ rules / enrichment    │
+                                   └──────────┬───────────────┘
+                                              │  INSERT (fraud)           Serilog logs
+                                              │  into SQL                 ─────────────►
+                                              │                           │
+                                              │ produce                   ▼
+                                              │ topic: transactions_enriched
+                                   ┌──────────▼───────────┐       ┌───────────────────┐
+                                   │   Kafka Connect      │──────►│   Elasticsearch   │
+                                   │ Elasticsearch Sink   │       └────────▲──────────┘
+                                   └──────────▲───────────┘                │
+                                              │                            │
+                                              │                            │ Kibana dashboards
+                                              │                            ▼
+                                   ┌──────────┴───────────┐      ┌───────────────────┐
+                                   │     Apache SQL       │      │      Kibana       │
+                                   │ (PostgreSQL store)   │      └───────────────────┘
+                                   └──────────────────────┘
 
-  user -->|HTTP| ui
-  ui -->|POST /transaction| api
-  api -->|produce| raw
-  raw -->|consume| worker
-  worker -->|produce| enriched
-  enriched -->|sink| connect
-  connect --> es
-  worker -->|Serilog| es
-  worker --> pg
-  es --> kib
-  zk -.-> broker
-  registry -.-> raw
-  registry -.-> enriched
+                             ( All containers orchestrated via Docker Compose )
