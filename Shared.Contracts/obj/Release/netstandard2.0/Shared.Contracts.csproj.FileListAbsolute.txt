@@ -1,0 +1,11 @@
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/bin/Release/netstandard2.0/Shared.Contracts.deps.json
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/bin/Release/netstandard2.0/Shared.Contracts.dll
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/bin/Release/netstandard2.0/Shared.Contracts.pdb
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.csproj.AssemblyReference.cache
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.AssemblyInfoInputs.cache
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.AssemblyInfo.cs
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.csproj.CoreCompileInputs.cache
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.sourcelink.json
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.dll
+/Users/taimoormasood/FraudDetectionApp/Shared.Contracts/obj/Release/netstandard2.0/Shared.Contracts.pdb

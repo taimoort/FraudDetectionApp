@@ -1,0 +1,59 @@
+{
+  "type": "record",
+  "name": "Transaction",
+  "namespace": "fd",
+  "fields": [
+    {
+      "name": "TransactionId",
+      "type": "string"
+    },
+    {
+      "name": "Amount",
+      "type": "double"
+    },
+    {
+      "name": "Timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "FraudScore",
+      "type": [
+        "null",
+        "double"
+      ],
+      "default": null
+    },
+    {
+      "name": "IsFraud",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "FraudReason",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "SourceService",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Environment",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    }
+  ]
+}

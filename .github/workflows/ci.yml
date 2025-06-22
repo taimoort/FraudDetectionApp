@@ -16,7 +16,10 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x # pick latest preview/GA 9 SDK
-
+      # ← Insert this so avrogen is installed before the build
+      - name: Restore .NET local tools
+        working-directory: Shared.Contracts
+        run: dotnet tool restore
       # restore caches (nuget) automatically handled by setup-dotnet v4
 
       - name: Build backend

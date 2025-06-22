@@ -1,0 +1,11 @@
+services:
+  transactionservice:
+    build:
+      context: .                      # repo root
+      dockerfile: TransactionService/Dockerfile          # path to the Dockerfile
+  frauddetectorservice:
+    build:
+      context: .                      # repo root
+      dockerfile: FraudDetectorService/Dockerfile          # path to the Dockerfile
+  frontend:
+    build: ./fraud-frontend

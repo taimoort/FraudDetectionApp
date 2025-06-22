@@ -60,28 +60,25 @@ services:
       - elasticsearch
   
   transactionservice:
-    build:
-      context: .                      # repo root
-      dockerfile: TransactionService/Dockerfile          # path to the Dockerfile
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:8080
       - Kafka__BootstrapServers=kafka:9092
       - Elasticsearch__Uri=http://elasticsearch:9200
+      - SchemaRegistry__Url=http://schema-registry:8081
     depends_on:
       - kafka
       - elasticsearch
     ports:
       - "5003:8080"                        # host 5003 → container 80
 
-  frauddetectorservice:
-    build: 
-      context: .                      # repo root 
-      dockerfile: FraudDetectorService/Dockerfile        
+  frauddetectorservice:       
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:5000
       - ConnectionStrings__FraudDatabase=Host=postgres;Port=5432;Database=fraud_db;Username=postgres;Password=postgres
       - Kafka__BootstrapServers=kafka:9092
       - Elasticsearch__Uri=http://elasticsearch:9200
+      - SchemaRegistry__Url=http://schema-registry:8081
+      - EnrichedTopic=transactions_enriched
     depends_on:
       - kafka
       - postgres
@@ -90,11 +87,49 @@ services:
       - "5001:5000" 
 
   frontend:
-    build: ./fraud-frontend
     depends_on:
       - frauddetectorservice    
     ports:
-      - "8080:80"               
+      - "8080:80"  
+
+  # — Kafka Connect with REST API
+  kafka-connect:
+    build:
+     context: .
+     dockerfile: kafka-connect
+    image: myorg/kafka-connect:7.4.0-es8
+    depends_on:
+      - kafka
+    ports:
+      - "8083:8083"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS:            "kafka:9092"
+      CONNECT_GROUP_ID:                     "connect-cluster"
+      CONNECT_CONFIG_STORAGE_TOPIC:         "_connect_config"
+      CONNECT_OFFSET_STORAGE_TOPIC:         "_connect_offset"
+      CONNECT_STATUS_STORAGE_TOPIC:         "_connect_status"
+      CONNECT_KEY_CONVERTER:                "org.apache.kafka.connect.storage.StringConverter"
+      CONNECT_VALUE_CONVERTER:              "io.confluent.connect.avro.AvroConverter"
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: "true"
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      CONNECT_REST_ADVERTISED_HOST_NAME:    "kafka-connect"
+      # Increase these topics if you restart often in dev
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1  
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.4.0
+    depends_on:
+      - kafka
+      - zookeeper
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: "PLAINTEXT://kafka:9092"
+      SCHEMA_REGISTRY_HOST_NAME: "schema-registry"
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"           
 
 volumes:
   zookeeper_data:

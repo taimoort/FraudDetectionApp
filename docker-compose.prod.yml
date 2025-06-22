@@ -1,0 +1,7 @@
+services:
+  transactionservice:
+    image: tamoormasood/transactionservice:latest
+  frauddetectorservice:
+    image: tamoormasood/frauddetectorservice:latest
+  frontend:
+    image: tamoormasood/frontend:latest

@@ -44,6 +44,10 @@
         "netstandard2.0": {
           "targetAlias": "netstandard2.0",
           "dependencies": {
+            "Apache.Avro": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
             "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
@@ -110,7 +114,19 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Apache.Avro": {
+              "target": "Package",
+              "version": "[1.12.0, )"
+            },
             "Confluent.Kafka": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
+            "Confluent.SchemaRegistry": {
+              "target": "Package",
+              "version": "[2.10.0, )"
+            },
+            "Confluent.SchemaRegistry.Serdes.Avro": {
               "target": "Package",
               "version": "[2.10.0, )"
             },

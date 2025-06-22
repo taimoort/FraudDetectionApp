@@ -9,6 +9,8 @@
       "FraudDetectorService/1.0.0": {
         "dependencies": {
           "Confluent.Kafka": "2.10.0",
+          "Confluent.SchemaRegistry": "2.10.0",
+          "Confluent.SchemaRegistry.Serdes.Avro": "2.10.0",
           "Microsoft.EntityFrameworkCore.Design": "9.0.5",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.4",
           "Serilog.AspNetCore": "9.0.0",
@@ -20,12 +22,50 @@
           "FraudDetectorService.dll": {}
         }
       },
+      "Apache.Avro/1.12.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "System.CodeDom": "8.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.1/Avro.dll": {
+            "assemblyVersion": "1.12.0.0",
+            "fileVersion": "1.12.0.0"
+          }
+        }
+      },
       "Confluent.Kafka/2.10.0": {
         "dependencies": {
           "librdkafka.redist": "2.10.0"
         },
         "runtime": {
           "lib/net8.0/Confluent.Kafka.dll": {
+            "assemblyVersion": "2.10.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        }
+      },
+      "Confluent.SchemaRegistry/2.10.0": {
+        "dependencies": {
+          "Confluent.Kafka": "2.10.0",
+          "Microsoft.Extensions.Caching.Memory": "9.0.5",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "runtime": {
+          "lib/net8.0/Confluent.SchemaRegistry.dll": {
+            "assemblyVersion": "2.10.0.0",
+            "fileVersion": "2.10.0.0"
+          }
+        }
+      },
+      "Confluent.SchemaRegistry.Serdes.Avro/2.10.0": {
+        "dependencies": {
+          "Apache.Avro": "1.12.0",
+          "Confluent.Kafka": "2.10.0",
+          "Confluent.SchemaRegistry": "2.10.0"
+        },
+        "runtime": {
+          "lib/net8.0/Confluent.SchemaRegistry.Serdes.Avro.dll": {
             "assemblyVersion": "2.10.0.0",
             "fileVersion": "2.10.0.0"
           }
@@ -668,12 +708,20 @@
       },
       "Mono.TextTemplating/3.0.0": {
         "dependencies": {
-          "System.CodeDom": "6.0.0"
+          "System.CodeDom": "8.0.0"
         },
         "runtime": {
           "lib/net6.0/Mono.TextTemplating.dll": {
             "assemblyVersion": "3.0.0.0",
             "fileVersion": "3.0.0.1"
+          }
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.25517"
           }
         }
       },
@@ -851,11 +899,11 @@
         }
       },
       "System.Buffers/4.5.1": {},
-      "System.CodeDom/6.0.0": {
+      "System.CodeDom/8.0.0": {
         "runtime": {
-          "lib/net6.0/System.CodeDom.dll": {
-            "assemblyVersion": "6.0.0.0",
-            "fileVersion": "6.0.21.52210"
+          "lib/net8.0/System.CodeDom.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
           }
         }
       },
@@ -931,6 +979,9 @@
       "System.Text.Json/9.0.5": {},
       "System.Threading.Channels/8.0.0": {},
       "Shared.Contracts/1.0.0": {
+        "dependencies": {
+          "Apache.Avro": "1.12.0"
+        },
         "runtime": {
           "Shared.Contracts.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -946,12 +997,33 @@
       "serviceable": false,
       "sha512": ""
     },
+    "Apache.Avro/1.12.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gFFnQ8j91zdbs5QvGo79139WnLpQB4rPbDx2Bnr664uBMSGhh422QsHd89Vv7WyT0+eT7qPL+6rZlnyor3aATw==",
+      "path": "apache.avro/1.12.0",
+      "hashPath": "apache.avro.1.12.0.nupkg.sha512"
+    },
     "Confluent.Kafka/2.10.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-beGF9x9Yw83NDTs0oyNdRHSR27HjF2NpwwCZZ45hEk1zE+yDW8JXuyzitfdYftLACCbuaBJCEh+ZW7Qxg9cdnA==",
       "path": "confluent.kafka/2.10.0",
       "hashPath": "confluent.kafka.2.10.0.nupkg.sha512"
+    },
+    "Confluent.SchemaRegistry/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-OGFhaBZiEmjyAThV6KHvjkdv1E+VxKrTfoioa69w4w0cloMmKpr82+CtDN15y0peobeHZ6s7WEnQgPJA2xZh/Q==",
+      "path": "confluent.schemaregistry/2.10.0",
+      "hashPath": "confluent.schemaregistry.2.10.0.nupkg.sha512"
+    },
+    "Confluent.SchemaRegistry.Serdes.Avro/2.10.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VhYhmcBH+HnGkH+sotcyes67gqR0Vd4EuAwqLeNTPxLHnE4PcHH7mzt/JIM03Fgj8kskjv5hW5lfQ0hhAePWEA==",
+      "path": "confluent.schemaregistry.serdes.avro/2.10.0",
+      "hashPath": "confluent.schemaregistry.serdes.avro.2.10.0.nupkg.sha512"
     },
     "Elasticsearch.Net/7.17.5": {
       "type": "package",
@@ -1184,6 +1256,13 @@
       "path": "mono.texttemplating/3.0.0",
       "hashPath": "mono.texttemplating.3.0.0.nupkg.sha512"
     },
+    "Newtonsoft.Json/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "path": "newtonsoft.json/13.0.1",
+      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
     "Npgsql/9.0.3": {
       "type": "package",
       "serviceable": true,
@@ -1289,12 +1368,12 @@
       "path": "system.buffers/4.5.1",
       "hashPath": "system.buffers.4.5.1.nupkg.sha512"
     },
-    "System.CodeDom/6.0.0": {
+    "System.CodeDom/8.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CPc6tWO1LAer3IzfZufDBRL+UZQcj5uS207NHALQzP84Vp/z6wF0Aa0YZImOQY8iStY0A2zI/e3ihKNPfUm8XA==",
-      "path": "system.codedom/6.0.0",
-      "hashPath": "system.codedom.6.0.0.nupkg.sha512"
+      "sha512": "sha512-WTlRjL6KWIMr/pAaq3rYqh0TJlzpouaQ/W1eelssHgtlwHAH25jXTkUphTYx9HaIIf7XA6qs/0+YhtLEQRkJ+Q==",
+      "path": "system.codedom/8.0.0",
+      "hashPath": "system.codedom.8.0.0.nupkg.sha512"
     },
     "System.Collections.Immutable/7.0.0": {
       "type": "package",

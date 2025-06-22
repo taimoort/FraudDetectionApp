@@ -19,11 +19,8 @@ namespace TransactionService.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] TransactionDto tx)
         {
-            // Serialize the DTO to JSON
-            var message = JsonSerializer.Serialize(tx);
-
             // Publish to the "transactions" Kafka topic
-            await _producer.SendMessageAsync("transactions", message);
+            await _producer.SendMessageAsync("transactions", tx);
 
             return Ok(new { status = "sent", tx.TransactionId });
         }

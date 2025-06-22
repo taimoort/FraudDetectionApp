@@ -2,6 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+        <!-- enable C# 8+ -->
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <!-- 1. Tell MSBuild which schemas to pick up -->
+  <ItemGroup>
+    <PackageReference Include="Apache.Avro" Version="1.12.0" />
+    <AvroSchema Include="schemas/*.avsc" />
+  </ItemGroup>
+
+  <!-- 2. Run avrogen before compiling -->
+  <Target Name="GenerateAvroClasses" BeforeTargets="Compile">
+  <!-- 1️⃣ make sure the tool is installed -->
+  <Exec Command="dotnet tool restore" />
+  <!-- 2️⃣ run code-gen: -s <schema>  <outputDir> -->
+  <Exec Command="dotnet tool run avrogen -s %(AvroSchema.Identity) Generated --namespace fd:Shared.Contracts" />
+</Target>
 
 </Project>

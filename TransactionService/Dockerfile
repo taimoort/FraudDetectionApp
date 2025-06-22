@@ -7,9 +7,10 @@ COPY FraudDetectionApp.sln .
 COPY TransactionService/*.csproj ./TransactionService/
 COPY FraudDetectorService/*.csproj ./FraudDetectorService/
 COPY Shared.Contracts/*.csproj    ./Shared.Contracts/
+COPY Shared.Contracts/.config/dotnet-tools.json Shared.Contracts/.config/
 # (add other project references here if needed)
 RUN dotnet restore
-
+RUN dotnet tool restore --tool-manifest Shared.Contracts/.config/dotnet-tools.json
 # now copy the rest of the source
 COPY . .
 

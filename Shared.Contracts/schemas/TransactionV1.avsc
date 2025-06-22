@@ -1,0 +1,22 @@
+{
+  "type": "record",
+  "name": "Transaction",
+  "namespace": "fd",
+  "fields": [
+    {
+      "name": "TransactionId",
+      "type": "string"
+    },
+    {
+      "name": "Amount",
+      "type": "double"
+    },
+    {
+      "name": "Timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

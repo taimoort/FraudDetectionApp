@@ -1,4 +1,6 @@
 
+using Confluent.Kafka;
+using Confluent.Kafka.SyncOverAsync;
 using FraudDetectorService;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -16,12 +18,20 @@ Log.Logger = new LoggerConfiguration()
         IndexFormat = "fraud-{0:yyyy.MM.dd}"
     })
     .CreateLogger();
+// read bootstrap from config/env
+//var kafkaBootstrap = builder.Configuration["Kafka:BootstrapServers"];
+builder.Services.AddSingleton<KafkaConsumerService>();
+builder.Services.AddHostedService<KafkaConsumerService>();
+// builder.Services.AddSingleton<IProducer<Null, string>>(sp =>
+// {
+//     var cfg = new ProducerConfig { BootstrapServers = kafkaBootstrap };
+//     return new ProducerBuilder<Null, string>(cfg).Build();
+// });
 
 builder.Services.AddSerilog();
 builder.Services.AddDbContext<FraudContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("FraudDatabase")));
-builder.Services.AddHostedService<KafkaConsumerService>();
-builder.Services.AddHostedService<Worker>();
+//builder.Services.AddHostedService<KafkaConsumerService>();
 
 var app = builder.Build();
 
