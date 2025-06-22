@@ -1,10 +1,10 @@
 # Fraud Detection App
 
-<img alt=".NET9" src="https://img.shields.io/badge/.NET-9.0-green"/><img alt="Kafka" src="https://img.shields.io/badge/Kafka-3.3-blue"/><img alt="Docker" src="https://img.shields.io/badge/Docker-ready-lightblue"/> 
+<img alt=".NET8" src="https://img.shields.io/badge/.NET-8.0-green"/><img alt="Kafka" src="https://img.shields.io/badge/Kafka-3.3-blue"/><img alt="Docker" src="https://img.shields.io/badge/Docker-ready-lightblue"/> 
 [![build-test](https://github.com/taimoort/FraudDetectionApp/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/taimoort/FraudDetectionApp/actions/workflows/ci.yml)
 [![docker build-and-push](https://github.com/taimoort/FraudDetectionApp/actions/workflows/docker-build.yml/badge.svg?branch=main)](https://github.com/taimoort/FraudDetectionApp/actions/workflows/docker-build.yml)
 
-This repo contains the initial setup for a .NET 9 + Kafka + PostgreSQL + React fraud detection system.
+This repo contains the initial setup for a .NET 8 + Kafka + PostgreSQL + React fraud detection system.
 
 ## Prerequisites
 
